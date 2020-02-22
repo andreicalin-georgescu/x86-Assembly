@@ -1,0 +1,35 @@
+%include "io.inc"
+extern printf
+
+section .data
+    stri: db "Clock ticks: %d", 0
+    var_edi dd 0
+    var_esi dd 0
+global CMAIN
+CMAIN:
+    mov ebp, esp; for correct debugging
+    ;write your code here
+    push ebp
+    mov ebp, esp
+
+    mov ecx, 1000
+    xor eax, eax
+    rdtsc
+    xor edi, edi
+    ;mov edi, eax
+    mov [var_edi], eax
+    
+Loop1:
+    loop Loop1
+    
+    mov [var_esi], eax
+    rdtsc
+    sub eax, [var_edi]
+    
+    push eax
+    push stri
+    call printf
+    add esp, 8
+    
+    leave
+    ret

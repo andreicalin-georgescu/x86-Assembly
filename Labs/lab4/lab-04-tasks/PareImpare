@@ -1,0 +1,61 @@
+%include "io.inc"
+
+%define ARRAY_SIZE    10
+
+section .data
+    dword_array dd -1392, 12544, -7992, 6992, 7202, -27187, 28789, 17897, 12988, -17992
+    print_p dd 'Nr pare este: ', 0
+    print_n dd 'Nr impare este: ', 0
+    a dd 0, 0
+    b dd 0, 0
+    
+section .text
+global CMAIN
+CMAIN:
+    mov ebp, esp; for correct debugging
+    ;write your code here
+    mov ebp, esp; for correct debugging
+    push ebp
+    mov ebp, esp
+    
+    xor eax, eax
+    mov ebx, 0
+    mov edx, 0
+    mov ecx, ARRAY_SIZE
+    
+loop_ip:
+    mov eax, dword [dword_array + 4 * (ecx - 1)]
+    cmp ecx, -1
+    je print
+    mov edx, 0
+    mov ebx, dword 2
+    div ebx
+    cmp edx, 0
+    je inc_pare
+    jne inc_impare
+    
+inc_pare:
+    
+    inc dword [b]
+    cmp ecx, 0
+    je print
+    loop loop_ip
+    
+inc_impare:
+   
+   
+    cmp ecx, 0
+    je print
+    inc dword [a]
+    loop loop_ip
+    
+print:    
+    PRINT_STRING print_n
+    PRINT_DEC 4, a
+    NEWLINE
+    PRINT_STRING print_p
+    PRINT_DEC 4, b
+    
+    leave
+    xor eax, eax
+    ret

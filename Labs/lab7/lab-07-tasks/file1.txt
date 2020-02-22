@@ -1,0 +1,8 @@
+sub esp, 4
+    mov [esp], dword 0
+    sub esp, 4
+    mov [esp], dword "mere"
+    sub esp, 4
+    mov [esp], dword "are "
+    sub esp, 4
+    mov [esp], dword "Ana "

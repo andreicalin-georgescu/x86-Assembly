@@ -1,0 +1,64 @@
+%include "io.inc"
+
+section .text
+section .data
+    ;string:  db 41h, 73h, 73h, 65h, 6Dh, 62h, 6Ch, 79h, 00h, 01h, 02h, 03h
+    string: db 0xde, 0xad, 0xbe, 0xef, 0x00
+    var: db "     ", 0
+global CMAIN
+CMAIN:
+     mov ebp, esp; for correct debugging
+    push ebp
+    mov ebp, esp
+    ;write your code here
+   ; PRINT_STRING [string]
+    xor eax, eax
+    xor edi, edi
+    jmp mainly
+conv1:
+    jmp skip_i
+    make1:
+        sub dl, '0'
+        mov ah, dl
+        cmp esi, 0
+        jz continue1
+        jnz continue2
+    make2:
+        sub dl, 'a' + 10
+        mov ah, dl
+        cmp esi, 0
+        jz continue1
+        jnz continue2
+     skip_i:   
+        cmp dl, '9' + 1
+        jl make1
+        cmp dl, 'f' + 1
+        jl make2
+mainly:
+   mov al, 139
+   
+   mov dl, al
+   
+   shr dl, 4
+   jmp conv1
+   continue1:
+   PRINT_DEC 4, dl
+   NEWLINE
+   xor esi, esi
+   inc esi
+   mov cl, dl
+   
+   shl al, 4
+   shr al, 4
+   xor dl, dl
+   mov dl, al
+   jmp conv1
+   PRINT_DEC 4, al
+   NEWLINE
+   continue2:
+   shl cl, 4
+   or cl, dl
+   PRINT_DEC 4, cl
+    xor eax, eax
+    leave
+    ret

@@ -1,0 +1,20 @@
+%include "io.inc"
+
+section .text
+global CMAIN
+CMAIN:
+    mov ebp, esp; for correct debugging
+    ;write your code here
+    push ebp
+    mov ebp, esp
+    xor eax, eax
+    mov al, 0FH
+    add al, 0F1H
+    print2:
+    PRINT_STRING ",signed off"
+    ;jo print2
+    jc print2
+;print:
+  ;  PRINT_STRING "Carry on"
+    leave
+    ret

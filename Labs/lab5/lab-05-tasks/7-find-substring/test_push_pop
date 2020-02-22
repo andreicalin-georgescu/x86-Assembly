@@ -1,0 +1,39 @@
+%include "io.inc"
+
+section .data
+    keep: dd 0
+section .text
+global CMAIN
+CMAIN:
+    mov ebp, esp; for correct debugging
+    
+    push 4294967295
+    pop eax
+    ;PRINT_UDEC 4, eax
+    print:
+    jo print
+    
+    mov esi, 4
+    mov dword [keep], esi
+    mov esi, dword [keep]
+    
+    PRINT_DEC 4, [keep]
+    xor eax, eax
+    
+    ret
+    
+    
+    out1:
+      mov esi, source_text
+      add esi, [ant]
+      xor edx, edx
+      xor eax, eax
+      
+      mov ecx, dword [source_length]
+      sub ecx, dword [ant]
+            counter1:
+                imul edx, 10
+                lodsb
+                sub al, 48
+                add edx, eax
+                loop counter1

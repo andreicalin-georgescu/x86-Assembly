@@ -1,0 +1,5 @@
+gcc -c -m64 fisier.c -o fisier.o
+student@IOCLA-VM:~/Desktop/IOCLA/lab-06-tasks/4-nm$ gcc -m64  source1.o fisier.o source2.o -lm -o exe
+student@IOCLA-VM:~/Desktop/IOCLA/lab-06-tasks/4-nm$ strip -s exe
+student@IOCLA-VM:~/Desktop/IOCLA/lab-06-tasks/4-nm$ ./exe 
+

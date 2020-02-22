@@ -1,0 +1,28 @@
+%include "io.inc"
+
+section .data
+;                12345678901234567890123456789012345
+source_text: db "A", 0
+substring: db "A", 0
+
+source_length: resd 1
+substr_length: dd 4
+a: dw 0
+b: dw 0
+print_format: db "Substring found at index: ", 0
+
+section .text
+global CMAIN
+CMAIN:
+    mov ebp, esp; for correct debugging
+    push ebp
+    mov ebp, esp
+    cld
+    mov edi, source_text
+    mov esi, substring
+    mov ecx, 2
+    repne cmpsb
+    
+    PRINT_DEC 4, ecx
+    leave
+    ret

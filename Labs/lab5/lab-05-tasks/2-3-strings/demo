@@ -1,0 +1,27 @@
+%include "io.inc"
+
+ssection .data
+    string db "Lorem ipsum dolor sit amet.", 0
+section .text
+global CMAIN
+CMAIN:
+    ;write your code here
+     mov ebp, esp; for correct debugging
+    push ebp
+    mov ebp, esp
+    xor ecx, ecx
+
+    xor edx, edx
+    xor eax, eax
+    xor eax, eax
+    
+    cld              ; setăm DF = 0
+    mov al, 'a'      ; char-ul pe care vrem să îl căutăm
+    mov edi, string  ; zona de memorie în care căutăm
+    repne scasb      ; parcurgem cu edi șirul până cănd caracterul la care pointează șirul este diferit de al
+ 
+    ; edi acum pointează la următorul caracter după primul caracter 'a'
+    sub edi, string  ; aflăm diferența dintre apariția char-ului 'a' și începutul șirului
+    dec edi
+    PRINT_UDEC 4, edi
+    ret

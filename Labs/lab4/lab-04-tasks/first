@@ -1,0 +1,27 @@
+%include "io.inc"
+
+section .text
+global CMAIN
+CMAIN:
+    mov ebp, esp; for correct debugging
+    push ebp
+    mov ebp, esp
+
+    mov eax, 211    ; to be broken down into powers of 2
+    mov ebx, 1 
+    
+label:
+    test eax, ebx
+    jnz print
+    shl ebx, 1
+    cmp eax, ebx
+    jg label
+    jl finish
+print:
+    PRINT_DEC 2, ebx
+    NEWLINE
+    shl ebx, 1
+    jmp label
+finish:
+    leave 
+    ret

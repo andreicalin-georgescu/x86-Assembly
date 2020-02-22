@@ -1,0 +1,28 @@
+%include "io.inc"
+
+section .data
+    string db "-are", 0
+    var db "-", 0
+section .text
+global CMAIN
+CMAIN:
+    ;write your code here
+    xor eax, eax
+    
+    mov eax, 32
+    not eax
+    add eax, 1
+   ; PRINT_DEC 4, '-'
+    mov esi, string
+    add esi, 0
+    ;PRINT_STRING [esi]
+    mov edi, var
+    ;mov ecx, 1
+    cmpsb
+    
+    je printa
+    jne skip
+    printa:
+        PRINT_STRING [esi]
+    skip:
+    ret

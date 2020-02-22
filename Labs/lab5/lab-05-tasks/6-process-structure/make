@@ -1,0 +1,59 @@
+%include "io.inc"
+
+section .text
+global CMAIN
+CMAIN:
+    mov ebp, esp; for correct debugging
+    ;write your code here
+     mov ebp, esp; for correct debugging
+    push ebp
+    mov ebp, esp
+    xor eax, eax
+    xor esi, esi
+    jmp mainly
+    
+    
+conv1:
+    jmp skip_i
+    make1:
+        sub dl, '0'
+       ; mov ch, dl
+        cmp esi, 0
+        jz continue1
+        jnz continue2
+    make2:
+        sub dl, 'a' + 10
+        ;mov ch, dl
+        cmp esi, 0
+        jz continue1
+        jnz continue2
+     skip_i:   
+        cmp dl, '9' + 1
+        jl make1
+        cmp dl, 'f' + 1
+        jl make2
+mainly:
+   mov al, 0xDa
+   
+   mov dl, al
+   xor ecx, ecx
+   shr dl, 4
+   jmp conv1
+   continue1:
+       xor esi, esi
+       inc esi
+       mov ch, dl
+   
+       shl al, 4
+       shr al, 4
+       xor edx, edx
+       mov dl, al
+       jmp conv1
+       continue2:
+           mov cl, dl
+           shl cl, 4
+           shr cx, 4
+           PRINT_HEX 4, cl
+    
+    leave
+    ret
